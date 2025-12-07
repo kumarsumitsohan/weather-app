@@ -1,0 +1,106 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neo Weather</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#101323" />
+
+    <!-- Icons (optional) -->
+    <link rel="icon" type="image/png" href="icons/icon-192.png" />
+
+    <!-- Libs you already used -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 3D Globe Background -->
+    <canvas id="globe-canvas"></canvas>
+
+    <!-- Weather Particles Layer -->
+    <div id="weather-particles"></div>
+
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-dot"></span>
+                <span>Neo Weather</span>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">
+                    🌓
+                </button>
+                <button class="primary-btn install-btn" id="install-btn" hidden>
+                    Install App
+                </button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <!-- LEFT: Weather Controls + Info -->
+            <section class="card main-card">
+                <div class="search-row">
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Search city, region or country..."
+                        autocomplete="off"
+                    />
+                    <button class="primary-btn" onclick="getWeather()">Get Weather</button>
+                    <button class="icon-btn" onclick="startVoiceSearch()" title="Voice search">🎤</button>
+                </div>
+
+                <div class="quick-actions">
+                    <button onclick="compareWeather()">🌍 Compare</button>
+                    <button onclick="showHistoricalWeather()">📅 Past</button>
+                    <button onclick="showFutureWeather()">🔮 Forecast</button>
+                    <button onclick="showAQI()">💨 AQI Info</button>
+                    <button onclick="toggleAR()">🕶️ AR (beta)</button>
+                    <button onclick="toggle3DGlobe()">🌎 Globe On/Off</button>
+                </div>
+
+                <div class="info-grid">
+                    <div id="weather-info" class="panel"></div>
+                    <div id="forecast-info" class="panel"></div>
+                    <div id="comparison-info" class="panel"></div>
+                </div>
+            </section>
+
+            <!-- RIGHT: AI Weather Assistant -->
+            <section class="card side-card">
+                <h2>AI Weather Assistant</h2>
+                <p class="side-subtitle">
+                    Ask things like: <br />
+                    <span>“Do I need an umbrella today?”</span><br />
+                    <span>“Is it good for a bike ride?”</span>
+                </p>
+
+                <div id="chat-log" class="chat-log">
+                    <!-- Messages go here -->
+                </div>
+
+                <div class="chat-input-row">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Type your question..."
+                        onkeydown="if(event.key==='Enter'){sendChat()}"
+                    />
+                    <button class="primary-btn" onclick="sendChat()">Send</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <span>Powered by WeatherAPI.com</span>
+            <span>Built by You 🚀</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
